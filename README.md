@@ -3,11 +3,11 @@
 Zetz Toolz V1 untuk mempermudah pengguna dalam melakukan sesuatu, script ini 100% tidak bayar dan bersifat NO ENC dan memakai bahasa pemograman yaitu Python
 
 # List CMD
-stop - untuk menghentikan sistem
-restart - untuk memulai ulang sistem
-cekkontol <nama> - cek seberapa hitam kontolnya
-track-ip <ip> - untuk melacak dimana letak ip berada
-kalkulator <angka1> <operator> <angka2> - Hanya kalkulator seperti biasanya
+1. stop - untuk menghentikan sistem
+2. restart - untuk memulai ulang sistem
+3. cekkontol <nama> - cek seberapa hitam kontolnya
+4. track-ip <ip> - untuk melacak dimana letak ip berada
+5. kalkulator <angka1> <operator> <angka2> - Hanya kalkulator seperti biasanya
 
 
 # Cara menjalankan script ini lewat Windows adalah:
