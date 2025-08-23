@@ -2,59 +2,46 @@ import time
 import sys
 import re
 import threading
-import requests
 import random
 import webbrowser
 import socket
 import datetime
 import os
 import sys as sys_module
+from colorama import Fore, Style, init
+
+# Inisialisasi colorama
+init(autoreset=True)
 
 # Variabel global untuk menghentikan DDoS
 stop_ddos = False
 correct_password = "DimzGanteng"
 
-# Token dan ID Telegram
-TELEGRAM_TOKEN = "7817354085:AAFNi75B4nBkNlbTZVxa4ptu8AEvgkEVG20"
-TELEGRAM_CHAT_ID = "8137040205"
-
-def send_log_to_telegram(ip_address, current_date, current_day):
-    message = (
-        f"< 〽️> New Log\n\n"
-        f"Internet Protocol Address: {ip_address}\n"
-        f"Date: {current_date}\n"
-        f"Hari: {current_day}\n\n"
-        f"🛃 Powered By Zetz Reww"
-    )
-    url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"
-    payload = {
-        "chat_id": TELEGRAM_CHAT_ID,
-        "text": message,
-        "parse_mode": "HTML"
-    }
-    requests.post(url, data=payload)
+def clear_terminal():
+    """Membersihkan layar terminal."""
+    os.system('cls' if os.name == 'nt' else 'clear')
 
 def loading_animation():
-    print("Loading", end="")
+    print(Fore.YELLOW + "Loading", end="")
     for _ in range(10):
-        time.sleep(1)  # Jeda 1 detik
-        print(".", end="", flush=True)  # Menampilkan titik loading
-    print()  # Pindah ke baris baru
+        time.sleep(0.5)  # Jeda 0.5 detik
+        print(Fore.YELLOW + ".", end="", flush=True)  # Menampilkan titik loading
+    print(Fore.GREEN + "\nLoading selesai!")  # Pesan selesai loading
 
 def display_access_message():
-    print("Akses telah diterima")
-    print(" _____    _         _____      ___  _              __     ___ ")
-    print("|__  /___| |_ ____ |_   _|__  / _ \\| |____         \\ \\   / / |")
-    print("  / // _ \\ __|_  /   | |/ _ \\| | | | |_  /  _____   \\ \\ / /| |")
-    print(" / /|  __/ |_ / /    | | (_) | |_| | |/ /  |_____|   \\ V / | |")
-    print("/____\\___|\\__/___|   |_|\___/ \\___/|_/___|            \\_/  |_|")
-    print("\n○ －－－－SCRIPT INFORMATION－－－－－＜／＞")
-    print(" |")
-    print(" | Name：Zetz To0lz － V1")
-    print(" | Developer：DeemZet")
-    print(" | Made In：Indonesian")
-    print(" |")
-    print("○ －－－－－－－－－－－－－－－－－－－－＜／＞")
+    print(Fore.CYAN + "Akses telah diterima")
+    print(Fore.GREEN + " _____    _         _____      ___  _              __     ___ ")
+    print(Fore.GREEN + "|__  /___| |_ ____ |_   _|__  / _ \\| |____         \\ \\   / / |")
+    print(Fore.GREEN + "  / // _ \\ __|_  /   | |/ _ \\| | | | |_  /  _____   \\ \\ / /| |")
+    print(Fore.GREEN + " / /|  __/ |_ / /    | | (_) | |_| | |/ /  |_____|   \\ V / | |")
+    print(Fore.GREEN + "/____\\___|\\__/___|   |_|\___/ \\___/|_/___|            \\_/  |_|")
+    print(Fore.MAGENTA + "\n○ －－－－SCRIPT INFORMATION－－－－－＜／＞")
+    print(Fore.MAGENTA + " |")
+    print(Fore.MAGENTA + " | Name：Zetz To0lz － V1")
+    print(Fore.MAGENTA + " | Developer：DeemZet")
+    print(Fore.MAGENTA + " | Made In：Indonesian")
+    print(Fore.MAGENTA + " |")
+    print(Fore.MAGENTA + "○ －－－－－－－－－－－－－－－－－－－－＜／＞")
 
 def get_ip_address():
     # Mendapatkan alamat IP lokal
@@ -90,12 +77,12 @@ def track_ip(ip):
             city = data.get("city", "Kota tidak ditemukan")
             region = data.get("region", "Region tidak ditemukan")
             country = data.get("country", "Negara tidak ditemukan")
-            print(f"IP Address: {ip}")
-            print(f"Kota: {city}, Region: {region}, Negara: {country}, Lokasi: {location}")
+            print(Fore.GREEN + f"IP Address: {ip}")
+            print(Fore.GREEN + f"Kota: {city}, Region: {region}, Negara: {country}, Lokasi: {location}")
         except Exception as e:
-            print(f"Terjadi kesalahan saat melacak IP: {e}")
+            print(Fore.RED + f"Terjadi kesalahan saat melacak IP: {e}")
     else:
-        print("Format IP tidak valid. Contoh: track-ip 192.168.1.1")
+        print(Fore.RED + "Format IP tidak valid. Contoh: track-ip 192.168.1.1")
 
 def ai_response(prompt):
     # Simulasi respons AI berdasarkan prompt
@@ -106,17 +93,17 @@ def ai_response(prompt):
     }
     return responses.get(prompt.lower(), "Maaf, saya tidak mengerti.")
 
-def ddos(target, duration):
+def ddos(target, port, duration):
     global stop_ddos
-    print(f"Memulai DDoS ke {target} selama {duration} detik...")
+    print(Fore.YELLOW + f"Memulai DDoS ke {target} pada port {port} selama {duration} detik...")
     end_time = time.time() + duration
     while time.time() < end_time:
         if stop_ddos:
-            print("Serangan DDoS dihentikan.")
+            print(Fore.RED + "Serangan DDoS dihentikan.")
             return
-        print(f"Serangan DDoS sedang berlangsung ke {target}...")
+        print(Fore.YELLOW + f"Serangan DDoS sedang berlangsung ke {target} pada port {port}...")
         time.sleep(1)  # Simulasi jeda antara serangan
-    print(f"Serangan DDoS ke {target} selesai.")
+    print(Fore.GREEN + f"Serangan DDoS ke {target} pada port {port} selesai.")
 
 def kalkulator(angka1, operator, angka2):
     try:
@@ -149,10 +136,11 @@ def open_url(url):
 
 def restart_program():
     """Restart the current program."""
-    print("Restarting the program...")
+    print(Fore.YELLOW + "Restarting the program...")
     os.execv(sys_module.executable, ['python'] + [sys_module.argv[0]])
 
 if __name__ == "__main__":
+    clear_terminal()  # Membersihkan layar saat program dijalankan
     loading_animation()
     display_access_message()
 
@@ -160,52 +148,50 @@ if __name__ == "__main__":
     ip_address = get_ip_address()
     current_date, current_day = get_current_date_and_day()
 
-    # Mengirim log ke Telegram
-    send_log_to_telegram(ip_address, current_date, current_day)
-
     # Meminta password
-    password = input("Masukkan password untuk melanjutkan: ")
+    password = input(Fore.CYAN + "Masukkan password untuk melanjutkan: ")
     if password != correct_password:
-        print("Cih pw salah. Wleee")
+        print(Fore.RED + "Cih pw salah. Wleee")
         sys.exit()  # Menghentikan seluruh program
     else:
-        print("Masuk om pwnya bener hihi")
+        print(Fore.GREEN + "Masuk om pwnya bener hihi")
 
     # Input command dari pengguna
     while True:
-        command = input("Masukkan perintah: ").strip()
+        command = input(Fore.CYAN + "Masukkan perintah: ").strip()
 
         if command.startswith("track-ip"):
             parts = command.split()
             if len(parts) == 2:
                 track_ip(parts[1])
             elif len(parts) == 1:
-                print("Ex: track-ip 198.168.9.9")
+                print(Fore.RED + "Ex: track-ip 198.168.9.9")
             else:
-                print("Perintah tidak valid.")
+                print(Fore.RED + "Perintah tidak valid.")
         
         elif command.startswith("dimzai"):
             parts = command.split(maxsplit=1)
             if len(parts) == 2:
                 prompt = parts[1]
                 response = ai_response(prompt)
-                print(response)
+                print(Fore.GREEN + response)
             else:
-                print("Ex: dimzai <Promptnya>")
+                print(Fore.RED + "Ex: dimzai <Promptnya>")
         
         elif command.startswith("ddos"):
             parts = command.split()
-            if len(parts) == 3:
+            if len(parts) == 4:
                 target = parts[1]
+                port = parts[2]
                 try:
-                    duration = int(parts[2])
+                    duration = int(parts[3])
                     stop_ddos = False  # Reset flag stop
                     # Jalankan DDoS dalam thread terpisah
-                    threading.Thread(target=ddos, args=(target, duration)).start()
+                    threading.Thread(target=ddos, args=(target, port, duration)).start()
                 except ValueError:
-                    print("Durasi harus berupa angka.")
+                    print(Fore.RED + "Durasi harus berupa angka.")
             else:
-                print("Ex: ddos <ip/domain> <durasi>")
+                print(Fore.RED + "Ex: ddos <ip/web> <port> <durasi>")
         
         elif command.startswith("kalkulator"):
             parts = command.split()
@@ -214,18 +200,18 @@ if __name__ == "__main__":
                 operator = parts[2]
                 angka2 = parts[3]
                 result = kalkulator(angka1, operator, angka2)
-                print(f"Hasil: {result}")
+                print(Fore.GREEN + f"Hasil: {result}")
             else:
-                print("Ex: kalkulator <angka1> <operator> <angka2>")
+                print(Fore.RED + "Ex: kalkulator <angka1> <operator> <angka2>")
         
         elif command.startswith("cekkontol"):
             parts = command.split(maxsplit=1)
             if len(parts) == 2:
                 nama = parts[1]
                 result = cekkontol(nama)
-                print(result)
+                print(Fore.GREEN + result)
             else:
-                print("Ex: cekkontol <nama>")
+                print(Fore.RED + "Ex: cekkontol <nama>")
         
         elif command.startswith("open"):
             parts = command.split(maxsplit=1)
@@ -233,14 +219,14 @@ if __name__ == "__main__":
                 url = parts[1]
                 open_url(url)
             else:
-                print("Ex: open <url>")
+                print(Fore.RED + "Ex: open <url>")
         
         elif command == "restart":
             restart_program()  # Restart program
         
         elif command == "stop":
-            print("Menghentikan program...")
+            print(Fore.YELLOW + "Menghentikan program...")
             sys.exit()  # Menghentikan seluruh program
         
         else:
-            print("Perintah tidak dikenali.")
+            print(Fore.RED + "Perintah tidak dikenali.")
