@@ -2,6 +2,8 @@
 
 Zetz Toolz V1 untuk mempermudah pengguna dalam melakukan sesuatu, script ini 100% tidak bayar dan bersifat NO ENC dan memakai bahasa pemograman yaitu Python
 
+Password: DimzGanteng
+
 # List CMD
 1. stop - untuk menghentikan sistem
 2. restart - untuk memulai ulang sistem
