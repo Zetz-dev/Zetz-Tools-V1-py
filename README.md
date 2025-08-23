@@ -8,6 +8,7 @@ Zetz Toolz V1 untuk mempermudah pengguna dalam melakukan sesuatu, script ini 100
 3. cekkontol <nama> - cek seberapa hitam kontolnya
 4. track-ip <ip> - untuk melacak dimana letak ip berada
 5. kalkulator <angka1> <operator> <angka2> - Hanya kalkulator seperti biasanya
+6. ddos <target> <port> <time> - just for fun :v
 
 
 # Cara menjalankan script ini lewat Windows adalah:
