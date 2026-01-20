@@ -15,7 +15,7 @@ init(autoreset=True)
 
 # Variabel global untuk menghentikan DDoS
 stop_ddos = False
-correct_password = "DimzGanteng"
+correct_password = fetch("https://gitlab.com/deemzet999/pwdzetztoolz/-/raw/main/db.txt")
 
 def clear_terminal():
     """Membersihkan layar terminal."""
